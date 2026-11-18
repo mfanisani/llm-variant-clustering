@@ -2,7 +2,7 @@
 
 Reads only frozen or versioned v2 outputs, writes nothing outside
 ``--output-dir``, and fails if any number differs from the value printed in
-``reports/workshop_paper_draft.md`` (rounded to three decimals).
+the paper (rounded to three decimals).
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ CASE_MAPS = {
 P7 = "p7_ordered_pyramid_1_2_4_bge"
 NGRAM = "ngram_tfidf_1_3"
 
-# Values printed in the paper draft; the script fails if a source disagrees.
+# Values printed in the paper; the script fails if a source disagrees.
 EXPECTED_TABLE1 = {
     "bpi2020": (753, 6449, "9"),
     "bpi2017": (5578, 31428, "2"),
@@ -166,8 +166,8 @@ def build(output_dir: Path) -> dict:
     pd.DataFrame(rows).to_csv(output_dir / "table3_heldout_f1.csv", index=False)
 
     manifest = {
-        "purpose": "canonical tables for reports/workshop_paper_draft.md",
-        "verified_against_draft": not errors,
+        "purpose": "canonical tables for the paper",
+        "verified_against_paper": not errors,
         "errors": errors,
         "inputs": {str(p.relative_to(ROOT)).replace("\\", "/"): _sha256(p) for p in sorted(inputs)},
         "outputs": sorted(p.name for p in output_dir.glob("table*.csv")),
@@ -182,8 +182,8 @@ def main() -> None:
     args = parser.parse_args()
     manifest = build(args.output_dir)
     if manifest["errors"]:
-        raise SystemExit("Mismatch with paper draft:\n" + "\n".join(manifest["errors"]))
-    print(f"OK: {len(manifest['outputs'])} tables match the draft; {len(manifest['inputs'])} inputs hashed.")
+        raise SystemExit("Mismatch with paper:\n" + "\n".join(manifest["errors"]))
+    print(f"OK: {len(manifest['outputs'])} tables match the paper; {len(manifest['inputs'])} inputs hashed.")
 
 
 if __name__ == "__main__":
