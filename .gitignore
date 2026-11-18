@@ -1,0 +1,38 @@
+# Python and tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv*/
+venv/
+.env
+tmp/
+
+# Event logs are downloaded by each user and never committed (licenses differ per log)
+datasets/raw/*
+!datasets/raw/.gitkeep
+datasets/interim/*
+!datasets/interim/.gitkeep
+datasets/processed/*
+!datasets/processed/.gitkeep
+
+# Downloaded models and the optional semantic-tagger environment
+models/*
+!models/.gitkeep
+.venv_tagger/
+
+# All generated outputs; only protocol documents and analysis code are tracked
+evaluation/**
+!evaluation/
+!evaluation/README.md
+!evaluation/*/
+!evaluation/*/PRESPEC.md
+!evaluation/*/PRESPEC_original.md
+!evaluation/*/PRESPEC*.sha256
+!evaluation/*/AMENDMENTS.md
+!evaluation/*/run.py
+logs/

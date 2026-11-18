@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "activity_semantics_p7.schema.json",
+  "title": "P7 Activity-Level Semantic Normalization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "activity_label",
+    "action",
+    "business_object",
+    "process_stage",
+    "explicit_state",
+    "explicit_role",
+    "ambiguity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "p7"
+    },
+    "activity_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "business_object": {
+      "type": "string",
+      "minLength": 1
+    },
+    "process_stage": {
+      "type": "string",
+      "enum": [
+        "initiation",
+        "review",
+        "decision",
+        "execution",
+        "settlement",
+        "closure",
+        "notification",
+        "exception",
+        "other",
+        "unknown"
+      ]
+    },
+    "explicit_state": {
+      "type": "string",
+      "enum": [
+        "created",
+        "submitted",
+        "approved",
+        "final_approved",
+        "rejected",
+        "saved",
+        "started",
+        "ended",
+        "requested",
+        "handled",
+        "reminded",
+        "cancelled",
+        "completed",
+        "other",
+        "unknown"
+      ]
+    },
+    "explicit_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ambiguity": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

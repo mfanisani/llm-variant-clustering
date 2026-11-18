@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "variant_signature_p3.schema.json",
+  "title": "P3 Structural-Semantic Variant Signature",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "variant_id",
+    "primary_object",
+    "apparent_goal",
+    "ordered_stages",
+    "start_semantics",
+    "end_semantics",
+    "explicit_outcome",
+    "exception_or_correction",
+    "control_flow_shape",
+    "rework",
+    "semantic_backtracking",
+    "important_transitions",
+    "apparent_completion_state",
+    "short_description",
+    "ambiguities"
+  ],
+  "properties": {
+    "schema_version": {"const": "p3"},
+    "variant_id": {"type": "string", "minLength": 1},
+    "primary_object": {"$ref": "#/$defs/claim"},
+    "apparent_goal": {"$ref": "#/$defs/claim"},
+    "ordered_stages": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/stage"}
+    },
+    "start_semantics": {"$ref": "#/$defs/claim"},
+    "end_semantics": {"$ref": "#/$defs/claim"},
+    "explicit_outcome": {"$ref": "#/$defs/claim"},
+    "exception_or_correction": {"$ref": "#/$defs/claim"},
+    "control_flow_shape": {
+      "type": "string",
+      "enum": [
+        "linear",
+        "repetitive",
+        "alternating",
+        "backtracking",
+        "mixed",
+        "indeterminate"
+      ]
+    },
+    "rework": {"$ref": "#/$defs/claim"},
+    "semantic_backtracking": {"$ref": "#/$defs/claim"},
+    "important_transitions": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {"$ref": "#/$defs/transition"}
+    },
+    "apparent_completion_state": {
+      "$ref": "#/$defs/completionState"
+    },
+    "short_description": {"$ref": "#/$defs/claim"},
+    "ambiguities": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "inference_type",
+        "evidence_activity_indices",
+        "confidence"
+      ],
+      "properties": {
+        "value": {"type": "string", "minLength": 1},
+        "inference_type": {
+          "type": "string",
+          "enum": ["observed", "inferred", "observed_absence", "unknown"]
+        },
+        "evidence_activity_indices": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0},
+          "uniqueItems": true
+        },
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "inference_type",
+        "evidence_activity_indices",
+        "confidence"
+      ],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "inference_type": {
+          "type": "string",
+          "enum": ["observed", "inferred"]
+        },
+        "evidence_activity_indices": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "integer", "minimum": 0},
+          "uniqueItems": true
+        },
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_activity_index",
+        "to_activity_index",
+        "semantic_relation",
+        "confidence"
+      ],
+      "properties": {
+        "from_activity_index": {"type": "integer", "minimum": 0},
+        "to_activity_index": {"type": "integer", "minimum": 1},
+        "semantic_relation": {"type": "string", "minLength": 1},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "completionState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "terminal_activity_index", "confidence"],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "explicitly_completed",
+            "explicitly_rejected",
+            "explicitly_cancelled",
+            "other_explicit_terminal_state",
+            "terminal_state_unclear"
+          ]
+        },
+        "terminal_activity_index": {"type": "integer", "minimum": 0},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    }
+  }
+}

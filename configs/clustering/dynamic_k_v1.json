@@ -1,0 +1,24 @@
+{
+  "algorithm": "stability_constrained_frequency_weighted_kmeans",
+  "status": "frozen_after_cross_dataset_calibration",
+  "calibration_datasets": [
+    "bpi2020_international_declarations",
+    "bpi2017",
+    "bpi2019"
+  ],
+  "config": {
+    "min_k": 2,
+    "max_k": 12,
+    "min_seed_stability_ari": 0.8,
+    "min_case_cluster_entropy": 0.75,
+    "min_cluster_case_fraction": 0.02,
+    "min_cluster_variants": 2,
+    "score_profiles": [
+      ["balanced", 0.4, 0.4, 0.2],
+      ["stability_heavy", 0.3, 0.5, 0.2],
+      ["separation_heavy", 0.5, 0.3, 0.2],
+      ["balance_heavy", 0.3, 0.3, 0.4]
+    ]
+  },
+  "config_sha256": "a38edde6ed7dbbb30ec0995a5ee9dcf371a7fb8e7a480c1a80b55dda4dbae982"
+}

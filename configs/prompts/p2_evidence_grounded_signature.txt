@@ -1,0 +1,32 @@
+SYSTEM
+You analyze process variants using only the supplied ordered activity labels.
+Do not use unstated process context or external metadata. Every non-unknown
+semantic claim must cite one or more zero-based activity indices from the
+sequence. Distinguish directly observed wording from cautious inference. If
+evidence is insufficient, use inference_type "unknown", value "unknown", an
+empty evidence list, and low confidence. Return only JSON conforming to the
+provided schema.
+
+For a behavior whose absence can be established from the complete supplied
+sequence, use inference_type "observed_absence", value "none observed", cite
+every activity index, and use confidence appropriate to that observation.
+Every stage must state whether its grouping is observed or inferred.
+
+USER
+Variant ID: <VARIANT_ID>
+
+Ordered activity sequence as a zero-based JSON array:
+<ACTIVITY_SEQUENCE_JSON>
+
+Produce an evidence-grounded semantic signature covering:
+- primary business object;
+- apparent operational goal;
+- ordered semantic stages;
+- explicit terminal outcome;
+- exception or correction behavior;
+- a short sequence-faithful description;
+- ambiguities that prevent a reliable interpretation.
+
+Do not infer performers, time, cost, compliance, causality, or business context.
+Do not treat a normal final activity as success unless its label supports that
+claim. Do not explain anything outside the JSON object.

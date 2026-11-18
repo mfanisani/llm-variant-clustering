@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "business_cluster_names.schema.json",
+  "title": "Business Cluster Names (P8)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "partition_code", "cluster_count", "clusters"],
+  "properties": {
+    "schema_version": {"const": "p8"},
+    "partition_code": {"type": "string", "minLength": 1},
+    "cluster_count": {"type": "integer", "minimum": 2},
+    "clusters": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "cluster_code",
+          "business_name",
+          "definition",
+          "distinguishing_features",
+          "evidence_ids",
+          "confidence",
+          "ambiguity_note"
+        ],
+        "properties": {
+          "cluster_code": {"type": "string", "minLength": 1},
+          "business_name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80
+          },
+          "definition": {"type": "string", "minLength": 1},
+          "distinguishing_features": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["description", "evidence_ids"],
+              "properties": {
+                "description": {"type": "string", "minLength": 1},
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {"type": "string", "minLength": 1},
+                  "uniqueItems": true
+                }
+              }
+            }
+          },
+          "evidence_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+          "ambiguity_note": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

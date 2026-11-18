@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "frozen_after_development",
+  "activity_normalizer_bundle": "configs\\frozen\\p7_activity_gpt41_v1",
+  "activity_semantics_file": "evaluation\\p7_recovery\\all_activity_semantics_frozen.parquet",
+  "activity_semantics_sha256": "4abcc5fc1d615e6cccdd5daf83f2557e4257e078550c51dc34ed051c61facd63",
+  "descriptor_serialization": "object; action; stage; state; role",
+  "descriptor_encoder": {
+    "model_id": "BAAI/bge-large-en-v1.5",
+    "model_revision": "d4aa6901d3a41ba39fb536a557fa166f842b0e09",
+    "normalized": true,
+    "truncation": false
+  },
+  "primary_representation": {
+    "name": "ordered_semantic_pyramid",
+    "levels": [1, 2, 4],
+    "empty_bin_value": 0.0,
+    "final_normalization": "l2",
+    "semantic_compiler_file": "src\\llm_variant_clustering\\semantic_compiler.py",
+    "semantic_compiler_sha256": "425d89dccd8431088d765e5216276f30860957a26ef72a5ed92c217ff112234b"
+  },
+  "primary_clustering": {
+    "config": "configs\\clustering\\dynamic_k_v1.json",
+    "config_sha256": "a38edde6ed7dbbb30ec0995a5ee9dcf371a7fb8e7a480c1a80b55dda4dbae982"
+  },
+  "secondary_fixed_k": 8,
+  "development_variant_count": 45,
+  "development_case_count": 148,
+  "development_dynamic_k": 3,
+  "development_dynamic_stability_ari": 1.0,
+  "development_dynamic_case_weighted_silhouette": 0.5826086163221337,
+  "development_fixed_k8_stability_ari": 0.9674251436381583,
+  "development_fixed_k8_case_weighted_silhouette": 0.640151963841161,
+  "development_fixed_metrics_sha256": "a46b04e32255f8dfa8625e7c4ffc35f920efe7e9b5c04d4de4c3581b6d8acc3e",
+  "development_dynamic_metrics_sha256": "8d2efa6628cfca94bbf9278c7a5d1dbf76a76f8a38645590e448d6125692fe35",
+  "ablations": [
+    "raw_sequence_bge",
+    "ngram_tfidf_1_3",
+    "mean_activity_semantics_bge"
+  ],
+  "rejected_during_development": [
+    "ordered_pyramid_ngram_hybrid"
+  ],
+  "frequency_usage": "sample_weight_in_clustering_objective_only",
+  "frozen_at": "2026-08-12T16:22:08.8003095Z"
+}

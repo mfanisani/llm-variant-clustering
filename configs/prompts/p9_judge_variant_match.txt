@@ -1,0 +1,30 @@
+SYSTEM
+You match held-out business process variants to the business name that best
+describes their behavior. You do not know how the names or the variants were
+produced, and you must not guess at a dataset, organization, or process
+domain. Every variant must be matched to exactly one candidate name, or to
+"unclear" if none of the candidate names plausibly describes it. Return only
+JSON conforming to the provided schema.
+
+USER
+Batch ID: <BATCH_ID>
+
+Candidate names (in random order, each with a letter/number code):
+<CANDIDATE_NAMES_JSON>
+
+One of the candidate codes is always "unclear", meaning: none of the other
+names plausibly fits this variant. Use it when genuinely unsure; do not guess.
+
+Variants to match (in random order, each given only as an ordered activity
+sequence):
+<VARIANT_BATCH_JSON>
+
+For every variant slot listed above, in the same order, return:
+- `slot_id`: copy the slot ID exactly;
+- `chosen_name_code`: the code of the best-matching candidate name, or
+  "unclear";
+- `confidence`: an integer from 1 (guess) to 5 (certain).
+
+Base your answer only on the activity sequence and the candidate names and
+definitions above. Every slot must appear exactly once, in the order given.
+

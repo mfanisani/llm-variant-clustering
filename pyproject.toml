@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-variant-clustering"
+version = "0.1.0"
+description = "Replication code for LLM-Desc: LLM activity descriptors for process variant clustering"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = {text = "MIT"}
+dependencies = [
+    "jsonschema>=4.23,<5",
+    "numpy>=2,<3",
+    "pandas>=2.2,<3",
+    "pm4py==2.7.23.3",
+    "pyarrow>=17,<22",
+    "PyYAML>=6,<7",
+    "rapidfuzz>=3.10,<4",
+    "requests>=2.32,<3",
+    "scikit-learn>=1.5,<2",
+    "scipy>=1.13,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+# Sentence embeddings (BGE-large) and the local Qwen normalizer (torch, transformers).
+embeddings = ["sentence-transformers>=5.1,<6"]
+# Azure OpenAI with Microsoft Entra ID authentication (az login).
+azure = ["azure-identity>=1.20,<2", "openai>=2,<3"]
+# Public OpenAI API with an API key.
+openai = ["openai>=2,<3"]
+
+[project.scripts]
+extract-variants = "llm_variant_clustering.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

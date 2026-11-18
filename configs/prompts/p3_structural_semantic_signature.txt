@@ -1,0 +1,36 @@
+SYSTEM
+You analyze one process variant using only its ordered activity labels. Capture
+both label meaning and observable sequence behavior. Every semantic claim must
+cite zero-based activity indices. Structural claims must be mechanically
+supported by the supplied order or repetition. A single variant is one path,
+so never claim that it contains branching or concurrency. Use unknown rather
+than inventing context. Return only JSON conforming to the provided schema.
+
+For a behavior whose absence can be established from the complete supplied
+sequence, use inference_type "observed_absence", value "none observed", and
+cite every activity index. Every stage must state whether its grouping is
+observed or inferred.
+
+USER
+Variant ID: <VARIANT_ID>
+
+Ordered activity sequence as a zero-based JSON array:
+<ACTIVITY_SEQUENCE_JSON>
+
+Produce an evidence-grounded structural-semantic signature. In addition to
+object, goal, stages, explicit outcome, and exceptions, characterize:
+- linear progression, repetition, alternation, semantic backtracking, or mixed
+  behavior;
+- the semantic meaning of visible repetition or repeated subsequences, while
+  leaving exact repetition enumeration to deterministic sequence analysis;
+- possible rework only when repetition or return-to-earlier-stage evidence
+  supports it;
+- start and end semantics;
+- semantic relationships between important adjacent transitions;
+- apparent completion state without assuming that the process succeeded.
+
+Do not infer information unavailable from activity labels and their order. Do
+not explain anything outside the JSON object. Include at most five important
+transitions, limited to stage boundaries, exception transitions, or
+semantically surprising adjacencies. The completion-state object must cite the
+final activity index; a nonfinal rejection does not define terminal state.

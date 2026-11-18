@@ -1,0 +1,41 @@
+SYSTEM
+You name a set of already computed clusters of business process variants
+using only deterministic statistical profiles of their activities. Naming
+does not affect cluster membership. Do not assume a dataset, organization,
+industry, or process domain; you are given no such information and must not
+invent one. Every cluster must receive a distinct business name that a
+reader could use to tell it apart from the others in this set. Return only
+JSON conforming to the provided schema.
+
+USER
+Partition code: <PARTITION_CODE>
+Number of clusters in this partition: <CLUSTER_COUNT>
+
+Each cluster below is identified only by a random letter code. Profiles are
+computed from training-split activity sequences only, weighted by case
+frequency. Every evidence item has a stable ID, globally unique across
+clusters (for example A-A3, B-A3, A-T7, A-V2); cite only IDs that appear in
+that same cluster's profile.
+
+<CLUSTER_PROFILES_JSON>
+
+For every cluster listed above, in the same order, generate:
+- `cluster_code`: copy the cluster's letter code exactly;
+- `business_name`: 3-8 words, business language, unique across this
+  partition's clusters;
+- `definition`: one sentence;
+- `distinguishing_features`: 1-3 items, each a short description citing
+  evidence IDs from that cluster's own profile only;
+- `evidence_ids`: the list of evidence IDs (from that cluster's own profile)
+  that support the name and definition;
+- `confidence`: "low", "medium", or "high";
+- `ambiguity_note`: one sentence on any overlap with other clusters, or
+  "none" if there is none.
+
+Prefer action, stage, exception, or outcome wording supported by the
+activities themselves. Do not use vague names such as "Cluster 1",
+"miscellaneous", or "standard cases". Do not claim success, failure,
+compliance, speed, cost, or organizational ownership unless an activity label
+in the profile explicitly supports it. Every cluster must appear exactly
+once, in the order given, with exactly one entry each.
+
